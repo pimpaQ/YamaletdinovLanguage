@@ -1,0 +1,20 @@
+﻿<Window x:Class="ЯмалетдиновЛангуаге.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ЯмалетдиновЛангуаге"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Icon="Res/school_logo.ico" FontFamily="Comic Sans MS" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Image Source="Res/school_logo.png" HorizontalAlignment="Left"/>
+        <TextBlock Text="Лангуаге" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Foreground="#FF04A0FF"/>
+        <Frame Grid.Row="1" Name="MainFrame" NavigationUIVisibility="Hidden" ContentRendered="MainFrame_ContentRendered"/>
+        <Button Content="Назад" Height="30" Width="150" HorizontalAlignment="Right" Background="#FF04A0FF" Name="Back_Btn" Click="Back_Btn_Click"/>
+    </Grid>
+</Window>

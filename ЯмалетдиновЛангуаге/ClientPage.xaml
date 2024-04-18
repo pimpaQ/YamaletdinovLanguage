@@ -1,0 +1,119 @@
+﻿<Page x:Class="ЯмалетдиновЛангуаге.ClientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ЯмалетдиновЛангуаге"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="ClientPage" FontFamily="Comic Sans MS">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Text="Выводить по " FontSize="15"/>
+            <ComboBox Width="60" FontSize="15" Height="30" Name="Page_ComboBox" SelectionChanged="Page_ComboBox_SelectionChanged" Margin="5 0 0 0">
+                <TextBlock Text="10"/>
+                <TextBlock Text="50"/>
+                <TextBlock Text="200"/>
+                <TextBlock Text="Все"/>
+            </ComboBox>
+            <TextBlock Name="TBCount" FontSize="15" Height="30" Margin="5 0 0 0"/>
+            <TextBlock Name="TBAllRecords" FontSize="15" Height="30"/>
+            <Button Name="LeftDirButton" Content="&lt;" Width="30" FontSize="15" Height="30" Background="#FF04A0FF" Click="LeftDirButton_Click"  Foreground="Black"/>
+            <ListBox FontSize="15" Name="PageListBox" Margin="0 0 0 0" MouseUp="PageListBox_MouseUp" Height="30">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+            <Button Name="RightDirButton" Content="&gt;" Width="30" FontSize="15" Height="30" Background="#FF04A0FF" Click="RightDirButton_Click" Foreground="Black"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ComboBox Name="ManySort_CB" Width="400" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="ManySort_CB_SelectionChanged" FontSize="20">
+                <TextBlock Text="Все"/>
+                <TextBlock Text="Фамилия в алфавитном порядке"/>
+                <TextBlock Text="Дате посещения от новых к старым"/>
+                <TextBlock Text="Количеству посещений от большего к меньшему"/>
+            </ComboBox>
+            <TextBox Grid.Row="0" Name="Search" Margin="20 0 0 0"  Width="300" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" TextChanged="Search_TextChanged"/>
+            <ComboBox Name="Gender_CB" Width="200" Height="30" Margin="20 0 0 0" VerticalAlignment="Center" SelectionChanged="Gender_CB_SelectionChanged" FontSize="20" HorizontalAlignment="Right" >
+                <TextBlock Text="Все"/>
+                <TextBlock Text="Мужской"/>
+                <TextBlock Text="Женский"/>
+            </ComboBox>
+            <Button Name="AddButton" Height="30" Width="150" Click="AddButton_Click" Background="#FF04A0FF" Content="Добавить" FontSize="15" HorizontalAlignment="Right" Margin="30 0 0 0"/>
+        </StackPanel>
+        <ListView Name="Client_LW" Grid.Row="1">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Удалить клиента" Click="MenuItem_Click"/>
+                    <MenuItem Header="Редактировать клиента" Name="EditDutton" Click="EditDutton_Click"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Width="200" Grid.Column="0" Grid.RowSpan="4" Stretch="UniformToFill" Margin="10" HorizontalAlignment="Center">
+                            <Image.Source>
+                                <Binding Path="PhotoPath">
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>
+                                            Res/picture.png
+                                        </ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Grid.Row="0">
+                            <TextBlock Text="ID:" FontSize="20"/>
+                            <TextBlock Text="{Binding ID}" Margin="5 0 0 0" FontSize="20"/>
+                            <TextBlock Text="{Binding FirstName}" Grid.Column="1" Margin="5 0 0 0" FontSize="20"/>
+                            <TextBlock Text="{Binding LastName}" Grid.Column="1" Grid.Row="1" Margin="5 0 0 0" FontSize="20"/>
+                            <TextBlock Text="{Binding Patronymic}" Grid.Column="1" Grid.Row="2" Margin="5 0 0 0" FontSize="20"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Text="Пол:" FontSize="20"/>
+                            <TextBlock Text="{Binding GenderN}" Margin="5 0 0 0" FontSize="20"/>
+                            <TextBlock Text="Дата рождения:" Margin="5 0 0 0" FontSize="20"/>
+                            <TextBlock Text="{Binding Birthday}" FontSize="20" Margin="5 0 0 0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Grid.Row="2">
+                            <TextBlock Text="Телефон:" FontSize="20"/>
+                            <TextBlock Text="{Binding Phone}" Margin="5 0 0 0" FontSize="20"/>
+                            <TextBlock Text="Email:" Margin="5 0 0 0" FontSize="20"/>
+                            <TextBlock Text="{Binding Email}" Margin="5 0 0 0" FontSize="20"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Grid.Row="3">
+                            <TextBlock Text="Дата регистрации" FontSize="20"/>
+                            <TextBlock Text="{Binding RegistrationDate}" Margin="5 0 0 0" FontSize="20"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Grid.Row="4">
+                            <TextBlock Text="Дата последнего посещения" FontSize="20"/>
+                            <TextBlock Name="ddd" Text="{Binding last_start, FallbackValue='нет'}" Margin="5 0 0 0" FontSize="20"/>
+                            <TextBlock Text="Количество посещений: " Margin="5 0 0 0" FontSize="20"/>
+                            <TextBlock Text="{Binding countStartDates}" Margin="5 0 0 0" FontSize="20"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
